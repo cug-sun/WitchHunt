@@ -1,5 +1,7 @@
 package RumourCards;
 
+import WitchHunt.Game;
+
 public class AngryMol extends RumourCard {
 	
 
@@ -8,17 +10,6 @@ public class AngryMol extends RumourCard {
 		// TODO 自动生成的构造函数存根
 	}
 
-	@Override
-	public void witchEffect() {
-		// TODO 自动生成的方法存根
-
-	}
-
-	@Override
-	public void huntEffect() {
-		// TODO 自动生成的方法存根
-
-	}
 
 	@Override
 	public RumourCardName getCardName() {
@@ -26,4 +17,15 @@ public class AngryMol extends RumourCard {
 		return null;
 	}
 
+	@Override
+	public void witchEffect(Game game) {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void huntEffect(Game game) {
+		// TODO 自动生成的方法存根
+
+	}
 }

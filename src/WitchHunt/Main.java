@@ -1,3 +1,4 @@
+package WitchHunt;
 import RumourCards.AngryMol;
 import RumourCards.RumourCard;
 import RumourCards.RumourCardName;

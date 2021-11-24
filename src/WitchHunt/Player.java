@@ -1,3 +1,4 @@
+package WitchHunt;
 import java.util.ArrayList;
 
 import RumourCards.RumourCard;
@@ -10,7 +11,7 @@ public class Player {
 	private boolean isIdRevealed;
 	//points of player
 	private int points;
-	//revealed Rumour cards pile
+	//pile of revealed Rumour cards
 	private ArrayList<RumourCard> revealedCards;
 	
 	public Player() {
