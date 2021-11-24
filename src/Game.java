@@ -22,7 +22,7 @@ public class Game {
 		//Initialize the pile
 		cardPile = new ArrayList<RumourCard>();
 		/*
-		 * 渚濇瀹炰緥鍖栧崄浜屽紶鐗岋紝鍔犲叆鐗屽爢
+		 * 依次实例化十二张牌，加入牌堆
 		 */
 //		RumourCardName[] cardNames = RumourCardName.values();
 //		for (int i=0; i < nHumourCards; i++) {
