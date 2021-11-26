@@ -1,5 +1,8 @@
 package WitchHunt;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 import RumourCards.RumourCard;
@@ -92,6 +95,17 @@ public class Game {
 	}
 	public void playGame() {
 		
+	}
+	
+	//if the game is end
+	public boolean isEnd() {
+		Player min = playerList.stream().min(Comparator.comparing(player -> player.getPoint())).get();
+		if(min.getPoint() >= 5) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }
