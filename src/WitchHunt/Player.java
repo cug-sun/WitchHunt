@@ -81,6 +81,9 @@ public class Player {
 		public void updatePoints(int points) {
 			this.points += points;
 		}
+		public int getPoint() {
+			return this.points;
+		}
 		
 	//Accuse another player of being a Witch
 	public void accuse() {
