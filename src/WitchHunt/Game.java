@@ -2,6 +2,7 @@ package WitchHunt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -94,7 +95,29 @@ public class Game {
 		}
 	}
 	public void playGame() {
-		
+		Player player = playerList.get(currentPlayer);
+		System.out.printf("Player %d, it's your turn\n", currentPlayer);
+		System.out.println("you must either:\n" +
+				"1.Accuse another player of being a Witch.\nor\n"
+				+ "2.Reveal a Rumour card from your hand and play it face up in front of yourself, resolving its Hunt! effect.");
+		Scanner scanner = new Scanner(System.in);
+		switch (scanner.nextInt()) {
+		case 1: {
+			//Accuse another player of being a Witch
+			System.out.println("You choose to accuse another player of being a Witch\n" +"Which player ?");
+			
+		}
+		case 2: {
+			//Reveal a Rumour card from hand, resolving its Hunt! effect
+			System.out.println("You have these revealed Rumour cards:");
+			for (RumourCard card : player.getRevealedCards()) {
+				System.out.printf("%d. %s\n",player.getRevealedCards().indexOf(card)+1, card.getCardName().toString());
+			}
+			
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + scanner);
+		}
 	}
 	
 	//if the game is end
@@ -105,6 +128,15 @@ public class Game {
 		}
 		else {
 			return false;
+		}
+	}
+	
+	public void displayPlayers() {
+		for (Player player : playerList) {
+			if(player.getPlayerId() == currentPlayer+1) {
+				continue;
+			}
+			System.out.printf("Player %d\n", player.getPlayerId());
 		}
 	}
 	
