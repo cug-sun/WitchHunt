@@ -7,9 +7,6 @@ import WitchHunt.Player;
 public class TheInquisition extends RumourCard {
 	
 	public static RumourCardName cardName = RumourCardName.The_Inquisition;
-	public TheInquisition() {
-		// TODO 自动生成的构造函数存根
-	}
 
 	@Override
 	public RumourCardName getCardName() {
