@@ -20,6 +20,8 @@ import RumourCards.TheInquisition;
 import RumourCards.Toad;
 import RumourCards.Wart;
 
+
+
 public class Game {
 	//Pile
 	public ArrayList<RumourCard> cardPile;
@@ -43,8 +45,7 @@ public class Game {
 		
 		System.out.println(this.nPlayer + " players");
 		System.out.println("Each player will have " + Game.nHumourCards/this.nPlayer + " Rumour Cards" );
-		
-				
+		initPlayer();
 	}
 	//initialize the rumours cards,add them to pile
 	public void initPile() {
@@ -105,31 +106,35 @@ public class Game {
 	public void initPlayer() {
 		playerList = new ArrayList<Player>();
 		for(int i = 1; i <= nPlayer; i++) {
-			
-			System.out.println("Player " + i + " chooses to be a 1.villager 2.witch");
-			Scanner scanner = new Scanner(System.in);
-			int id = scanner.nextInt();
-			switch (id) {
-			case 1: {
-				Player newPlayer = new Player(i, Identity.Villager);
-				playerList.add(newPlayer);
-				break;
-			}
-			case 2: {
-				Player newPlayer = new Player(i, Identity.Witch);
-				playerList.add(newPlayer);
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + id);
-			}
-			
-			
+			Player newPlayer = new Player(i);
+			playerList.add(newPlayer);		
 		}
+		chooseIdentity();
 		//Randomly select start player
 		currentPlayer = (int)(Math.random() * (nPlayer));
 		System.out.println("Start from player " + (currentPlayer+1));
 	}
+	
+	public void chooseIdentity() {
+		for (Player player : playerList) {
+			System.out.printf("Player %d chooses to be a 1.Villager 2.Witch\n",player.getPlayerId());
+			Scanner scanner = new Scanner(System.in);
+			int identity = scanner.nextInt();
+			switch (identity) {
+			case 1: {
+				player.setIdentity(Identity.Villager);
+				break;
+			}
+			case 2: {
+				player.setIdentity(Identity.Witch);
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + scanner);
+			}
+		}
+	}
+	
 	public ArrayList<Player> getPlayerList(){
 		return this.playerList;
 	}
@@ -163,8 +168,10 @@ public class Game {
 			System.out.println("You choose to accuse another player of being a Witch\n" +"Which player ?");
 			displayUnaccusedPlayers();
 			scanner.nextInt();
+			
 			//the accused player acts
 			playerList.get(scanner.nextInt() - 1).beingAccuesd(curPlayer,this);
+			
 		}
 		case 2: {
 			//Reveal a Rumour card from hand, resolving its Hunt! effect
@@ -172,6 +179,7 @@ public class Game {
 			curPlayer.displayHand();
 			System.out.println("Which card do you want to use ?");
 			RumourCard choosedCard = curPlayer.getHand().get(scanner.nextInt()-1);
+			System.out.printf("You choose to use %s\n",choosedCard.getCardName().toString());
 			choosedCard.huntEffect(this);
 			
 		}
