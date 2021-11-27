@@ -224,8 +224,8 @@ public class Game {
 	}
 	//if the game is end
 	public boolean isGameEnd() {
-		Player min = playerList.stream().min(Comparator.comparing(player -> player.getPoint())).get();
-		if(min.getPoint() >= 5) {
+		Player max = playerList.stream().max(Comparator.comparing(player -> player.getPoint())).get();
+		if(max.getPoint() >= 5) {
 			return true;
 		}
 		else {
