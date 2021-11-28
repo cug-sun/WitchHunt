@@ -7,19 +7,21 @@ public class BlackCat extends RumourCard {
 
 	@Override
 	public RumourCardName getCardName() {
-		// TODO 自动生成的方法存根
+		// TODO 
 		return cardName;
 	}
 
 	@Override
 	public void witchEffect(Game game) {
-		// TODO 自动生成的方法存根
-
+		//take next turn
+		game.setCurrentPlayer(game.getCurrentPlayer());
 	}
+
+
 
 	@Override
 	public void huntEffect(Game game) {
-		// TODO 自动生成的方法存根
+		// TODO 
 
 	}
 

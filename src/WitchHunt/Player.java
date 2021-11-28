@@ -15,7 +15,7 @@ public class Player {
 	//points of player
 	private int points;
 	//pile of revealed Rumour cards
-	private ArrayList<RumourCard> revealedCards;
+	public ArrayList<RumourCard> revealedCards;
 	
 	public Player(int playerId) {
 		this.playerId = playerId;
