@@ -1,5 +1,5 @@
 package WitchHunt;
-import RumourCards.AngryMol;
+import RumourCards.AngryMob;
 import RumourCards.RumourCard;
 import RumourCards.RumourCardName;
 import RumourCards.TheInquisition;
@@ -18,7 +18,7 @@ public class Main {
 //		aPlayer.revealIdentity();
 //		witchHunt.playerList.get(0).revealIdentity();
 //		RumourCard angryMol = new TheInquisition();
-//		angryMol.huntEffect(witchHunt);
+//		angryMol.
 		//witchHunt.displayPlayers();
 //		witchHunt.playGame();
 		witchHunt.initPile();

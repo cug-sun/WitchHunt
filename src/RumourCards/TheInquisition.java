@@ -8,6 +8,11 @@ public class TheInquisition extends RumourCard {
 	
 	public static RumourCardName cardName = RumourCardName.The_Inquisition;
 
+	public TheInquisition() {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
 	@Override
 	public RumourCardName getCardName() {
 		// TODO 自动生成的方法存根
@@ -29,8 +34,9 @@ public class TheInquisition extends RumourCard {
 		//Only playable if you have been revealed as a villager
 		Player player = game.getCurrentPlayer();
 		if(player.isRevealed() == true && player.getIdentity() == Identity.Villager) {
-			System.out.println("Choose a player to play next turn");
+			System.out.println("Choose a player to play next turn, you can look at his/her identity");
 			player.chooseNextPlayer(game);
+			//currentPlayer has changed to the next choosen player 
 			String nextIdentity = game.getCurrentPlayer().getIdentity().toString();
 			System.out.printf("The player you choose is a %s",nextIdentity);
 			

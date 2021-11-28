@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import RumourCards.AngryMol;
+import RumourCards.AngryMob;
 import RumourCards.BlackCat;
 import RumourCards.Broomstick;
 import RumourCards.Cauldron;
@@ -34,7 +34,7 @@ public class Game {
 	ArrayList<Player> playerList;
 	//index of current player in playerList
 	private Player currentPlayer;
-	//an array to save the accuse relation, accuse[0] is the player who accuses, accuse[1] is the accused player
+	//an array to save the accuse relation, accuse[0] is the playerId of player who accuses, accuse[1] is the playerId of accused player
 	private int[] accuse = new int[2];
 	public Game() {
 		System.out.println("*****************Witch Hunt*****************");
@@ -53,7 +53,7 @@ public class Game {
 		cardPile = new ArrayList<RumourCard>();
 		//Initialize the discard pile
 		discardPile = new ArrayList<RumourCard>();
-		RumourCard angryMol = new AngryMol();
+		RumourCard angryMob = new AngryMob();
 		RumourCard blackCat = new BlackCat();
 		RumourCard broomstick = new Broomstick();
 		RumourCard cauldron = new Cauldron();
@@ -65,7 +65,7 @@ public class Game {
 		RumourCard theInquisition = new TheInquisition();
 		RumourCard toad = new Toad();
 		RumourCard wart = new Wart();
-		cardPile.add(angryMol);
+		cardPile.add(angryMob);
 		cardPile.add(blackCat);
 		cardPile.add(broomstick);
 		cardPile.add(cauldron);
@@ -143,23 +143,14 @@ public class Game {
 		return this.currentPlayer;
 	}
 	
+	public int[] getAccuse() {
+		return this.accuse;
+	}
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player;
 	}
 	
 	
-	//take next turn
-//	public void nextTurn() {
-//		int currIndex = playerList.indexOf(currentPlayer);
-//		int nextIndex = currIndex +1;
-//		if(nextIndex == playerList.size()) {
-//			nextIndex = 0;
-//			currentPlayer = playerList.get(nextIndex);
-//		}
-//		else {
-//			currentPlayer = playerList.get(nextIndex);
-//		}
-//	}
 	public void playGame() {
 		
 		System.out.printf("Player %d, it's your turn\n", currentPlayer.getPlayerId());
@@ -170,12 +161,15 @@ public class Game {
 		switch (scanner.nextInt()) {
 		case 1: {
 			//Accuse another player of being a Witch
-			System.out.println("You choose to accuse another player of being a Witch\n" +"Which player ?");
+			System.out.println("You choose to accuse another player of being a Witch\nWhich player ?");
 			displayUnaccusedPlayers();
-			scanner.nextInt();
-			
+			int choosedId = scanner.nextInt();
+			Player accusedPlayer = findPlayer(choosedId);
+			accuse[0] = currentPlayer.getPlayerId();
+			accuse[1] = accusedPlayer.getPlayerId();
 			//the accused player acts
-			playerList.get(scanner.nextInt() - 1).beingAccuesd(currentPlayer,this);
+			accusedPlayer.beingAccuesd(currentPlayer,this);
+			setCurrentPlayer(accusedPlayer);
 			
 		}
 		case 2: {
@@ -237,7 +231,18 @@ public class Game {
 			return false;
 		}
 	}
-	//display the players who haven't been accused yet
+	//display all the players except current player
+	public void displayPlayers() {
+		for (Player player : playerList) {
+			if (player == currentPlayer) {
+				continue;
+			}
+			else {
+				System.out.printf("Player %d\n", player.getPlayerId());
+			}
+		}
+	}
+	//display the players who haven't been accused to reveal identity card
 	public void displayUnaccusedPlayers() {
 		for (Player player : playerList) {
 			if(player == currentPlayer) {

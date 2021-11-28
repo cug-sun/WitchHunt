@@ -1,10 +1,17 @@
 package RumourCards;
 
 import WitchHunt.Game;
+import WitchHunt.Player;
+
 
 public class Broomstick extends RumourCard {
 	public static RumourCardName cardName = RumourCardName.Broomstick;
 	
+
+	public Broomstick() {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
 
 	@Override
 	public RumourCardName getCardName() {
@@ -15,13 +22,19 @@ public class Broomstick extends RumourCard {
 	@Override
 	public void witchEffect(Game game) {
 		// TODO 自动生成的方法存根
-
+		Player player = game.getCurrentPlayer();
+		System.out.println("You will take next turn");
+		game.setCurrentPlayer(player);
+		
 	}
 
 	@Override
 	public void huntEffect(Game game) {
 		// TODO 自动生成的方法存根
-
+		Player player = game.getCurrentPlayer();
+		System.out.println("Choose a player to play next turn");
+		player.chooseNextPlayer(game);
+		
 	}
 
 }

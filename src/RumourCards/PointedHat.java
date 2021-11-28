@@ -9,6 +9,11 @@ public class PointedHat extends RumourCard {
 
 	public static RumourCardName cardName = RumourCardName.Pointed_Hat;
 
+	public PointedHat() {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
 	@Override
 	public RumourCardName getCardName() {
 		// TODO 自动生成的方法存根
@@ -29,7 +34,9 @@ public class PointedHat extends RumourCard {
 			RumourCard choosedCard = player.getRevealedCards().get(scanner.nextInt() - 1);
 			System.out.printf("You take %s into your hand\n", choosedCard.getCardName().toString());
 			player.addHand(choosedCard);
+			player.getRevealedCards().remove(choosedCard);
 			//current player takes next turn
+			System.out.println("You will take next turn");
 			game.setCurrentPlayer(game.getCurrentPlayer());
 		}
 		else {
@@ -51,6 +58,7 @@ public class PointedHat extends RumourCard {
 			RumourCard choosedCard = player.getRevealedCards().get(scanner.nextInt() - 1);
 			System.out.printf("You take %s into your hand\n", choosedCard.getCardName().toString());
 			player.addHand(choosedCard);
+			player.getRevealedCards().remove(choosedCard);
 			//Choose another player to play next turn
 			player.chooseNextPlayer(game);
 		}

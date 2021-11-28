@@ -85,7 +85,7 @@ public class Player {
 			}
 			System.out.println("Which card will you discard ?");
 			Scanner scanner = new Scanner(System.in);
-			RumourCard discarded = hand.remove(scanner.nextInt());
+			RumourCard discarded = hand.remove(scanner.nextInt()-1);
 			System.out.println("You discard " + discarded.getCardName().toString());
 			game.discardPile.add(discarded);
 		}
@@ -132,11 +132,11 @@ public class Player {
 				System.out.println("You choose to reveal a Rumour card from you hand and resolving its Witch? effect");
 				System.out.println("You have these Rumour cards in your hand, which one do you want to use ?");
 				this.displayHand();
-				RumourCard choosedCard = hand.get(scanner.nextInt());
+				RumourCard choosedCard = hand.get(scanner.nextInt()-1);
 				System.out.printf("You choose %s to effect it's Witch? effect\n",choosedCard.getCardName().toString());
 				choosedCard.witchEffect(game);
 				//add this card to revealed card pile
-				hand.remove(1);
+				hand.remove(choosedCard);
 				revealedCards.add(choosedCard);
 			}
 			default:
