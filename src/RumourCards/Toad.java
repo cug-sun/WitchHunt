@@ -20,6 +20,7 @@ public class Toad extends RumourCard {
 	public void witchEffect(Game game) {
 		//take next turn
 		game.setCurrentPlayer(game.getCurrentPlayer());
+		super.isUsed = true;
 	}
 
 
@@ -44,11 +45,12 @@ public class Toad extends RumourCard {
 				Player leftPlayerChoose = game.findPlayer(leftPlayer);
 				game.setCurrentPlayer(leftPlayerChoose);
 			}
-			
+		super.isUsed = true; 
 		} else {
 			//cant use Hunt! effect return to the step choose action
 			System.out.println("your identity has been revealed, you cant use the Hunt! effect");
 			game.setCurrentPlayer(game.getCurrentPlayer());
+		super.isUsed = false;
 		}
 		
 	}

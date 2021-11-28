@@ -39,6 +39,7 @@ public class PetNewt extends RumourCard {
 	public void witchEffect(Game game) {
 		//take next turn
 		game.setCurrentPlayer(game.getCurrentPlayer());
+		super.isUsed = true;
 	}
 
 	@Override
@@ -57,9 +58,11 @@ public class PetNewt extends RumourCard {
 				//current player takes next turn
 				game.setCurrentPlayer(game.getCurrentPlayer());
 			}
+		super.isUsed = true;
 		} else {
 			System.out.println("Other player doesn't revealed any cards");
 			game.setCurrentPlayer(game.getCurrentPlayer());
+		super.isUsed = false;
 		}
 
 	}
