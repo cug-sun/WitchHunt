@@ -39,6 +39,8 @@ public class BlackCat extends RumourCard {
 			player.addHand(choosedCard);
 			//current player takes next turn
 			game.setCurrentPlayer(game.getCurrentPlayer());
+			game.discardPile.add(choosedCard);
+			choosedCard.isUsed = true;
 			super.isUsed = true;
 		}
 		else {
