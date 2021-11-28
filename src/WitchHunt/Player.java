@@ -69,7 +69,7 @@ public class Player {
 			if (player.equals(game.getCurrentPlayer())) {
 				continue;
 			}
-			System.out.printf("Player %d", player.getPlayerId());
+			System.out.printf("Player %d\n", player.getPlayerId());
 		}
 		Scanner scanner = new Scanner(System.in);
 		int choosedId = scanner.nextInt();

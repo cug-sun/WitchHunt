@@ -35,7 +35,7 @@ public class Main {
 //			System.out.println("Player "+witchHunt.getCurrentPlayer().getPlayerId());
 //		}
 //		witchHunt.displayUnaccusedPlayers();
-		
+		witchHunt.getCurrentPlayer().chooseNextPlayer(witchHunt);
 		
 	}
 
