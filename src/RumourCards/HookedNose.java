@@ -15,7 +15,7 @@ public class HookedNose extends RumourCard {
 	@Override
 	public void witchEffect(Game game) {
 		// TODO 自动生成的方法存根
-		Player player = game.getPlayerList().get(game.getCurrentPlayer());
+		Player player = game.getCurrentPlayer();
 		
 	}
 

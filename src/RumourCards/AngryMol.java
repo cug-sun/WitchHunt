@@ -26,20 +26,20 @@ public class AngryMol extends RumourCard {
 	@Override
 	public void huntEffect(Game game) {
 		// TODO 自动生成的方法存根
-		Player player = game.getPlayerList().get(game.getCurrentPlayer());
+		Player player = game.getCurrentPlayer();
 		//Only playable if you have been revealed as a villager
 		if(player.isRevealed() == true && player.getIdentity() == Identity.Villager) {
 			//reveal another player's identity
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("You can reveal another player's identity\nInput the player's id");
-			int choosedId = scanner.nextInt()-1;
-			Player choosedPlayer = game.getPlayerList().get(choosedId);
+			int choosedId = scanner.nextInt();
+			Player choosedPlayer = game.findPlayer(choosedId);
 			choosedPlayer.revealIdentity();
 			//calculate point
 			if (choosedPlayer.getIdentity() == Identity.Villager) {
 				System.out.println("You lose 2 pts, the player whose identity card you reveal plays the next turn");
 				player.updatePoints(-2);
-				game.setCurrentPlayer(choosedId);
+				game.setCurrentPlayer(choosedPlayer);
 			}
 			else if (choosedPlayer.getIdentity() == Identity.Witch) {
 				System.out.println("You gain 2 pts, you take next turn");

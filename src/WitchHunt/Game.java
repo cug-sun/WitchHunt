@@ -33,7 +33,7 @@ public class Game {
 	public static final int nHumourCards = 12;
 	ArrayList<Player> playerList;
 	//index of current player in playerList
-	private int currentPlayer;
+	private Player currentPlayer;
 	//an array to save the accuse relation, accuse[0] is the player who accuses, accuse[1] is the accused player
 	private int[] accuse = new int[2];
 	public Game() {
@@ -111,8 +111,8 @@ public class Game {
 		}
 		chooseIdentity();
 		//Randomly select start player
-		currentPlayer = (int)(Math.random() * (nPlayer));
-		System.out.println("Start from player " + (currentPlayer+1));
+		currentPlayer = playerList.get((int)(Math.random() * (nPlayer)));
+		System.out.println("Start from player " + (currentPlayer.getPlayerId()));
 	}
 	
 	public void chooseIdentity() {
@@ -139,25 +139,30 @@ public class Game {
 		return this.playerList;
 	}
 	
-	public int getCurrentPlayer() {
+	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
 	
-	public void setCurrentPlayer(int id) {
-		this.currentPlayer = id;
+	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player;
 	}
 	
 	
 	//take next turn
 	public void nextTurn() {
-		this.currentPlayer += 1;
-		if(this.currentPlayer == nPlayer) {
-			this.currentPlayer = 0;
+		int currIndex = playerList.indexOf(currentPlayer);
+		int nextIndex = currIndex +1;
+		if(nextIndex == playerList.size()) {
+			nextIndex = 0;
+			currentPlayer = playerList.get(nextIndex);
+		}
+		else {
+			currentPlayer = playerList.get(nextIndex);
 		}
 	}
 	public void playGame() {
-		Player curPlayer = playerList.get(currentPlayer);
-		System.out.printf("Player %d, it's your turn\n", currentPlayer+1);
+		
+		System.out.printf("Player %d, it's your turn\n", currentPlayer.getPlayerId());
 		System.out.println("you must either:\n" +
 				"1.Accuse another player of being a Witch.\nor\n"
 				+ "2.Reveal a Rumour card from your hand and play it face up in front of yourself, resolving its Hunt! effect.");
@@ -170,15 +175,15 @@ public class Game {
 			scanner.nextInt();
 			
 			//the accused player acts
-			playerList.get(scanner.nextInt() - 1).beingAccuesd(curPlayer,this);
+			playerList.get(scanner.nextInt() - 1).beingAccuesd(currentPlayer,this);
 			
 		}
 		case 2: {
 			//Reveal a Rumour card from hand, resolving its Hunt! effect
 			System.out.println("You have these revealed Rumour cards:");
-			curPlayer.displayHand();
+			currentPlayer.displayHand();
 			System.out.println("Which card do you want to use ?");
-			RumourCard choosedCard = curPlayer.getHand().get(scanner.nextInt()-1);
+			RumourCard choosedCard = currentPlayer.getHand().get(scanner.nextInt()-1);
 			System.out.printf("You choose to use %s\n",choosedCard.getCardName().toString());
 			choosedCard.huntEffect(this);
 			
@@ -235,7 +240,7 @@ public class Game {
 	//display the players who haven't been accused yet
 	public void displayUnaccusedPlayers() {
 		for (Player player : playerList) {
-			if(player.getPlayerId() == currentPlayer+1) {
+			if(player == currentPlayer) {
 				continue;
 			}
 			else {
@@ -249,6 +254,19 @@ public class Game {
 			
 			
 		}
+	}
+	
+	//find a player by his playerId
+	public Player findPlayer(int id) {
+		Player target = null;
+		Iterator<Player> iterator = playerList.iterator();
+		while (iterator.hasNext()) {
+			target = iterator.next();
+			if (target.getPlayerId()==id) {
+				break;
+			}
+		}
+		return target;
 	}
 	
 }

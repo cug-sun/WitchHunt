@@ -18,7 +18,7 @@ public class PointedHat extends RumourCard {
 	@Override
 	public void witchEffect(Game game) {
 		// TODO 自动生成的方法存根
-		Player player = game.getPlayerList().get(game.getCurrentPlayer());
+		Player player = game.getCurrentPlayer();
 		if(!player.getRevealedCards().isEmpty()) {
 			System.out.println("You have these revealed Rumour cards:");
 			for (RumourCard card : player.getRevealedCards()) {
@@ -40,7 +40,7 @@ public class PointedHat extends RumourCard {
 	@Override
 	public void huntEffect(Game game) {
 		// TODO 自动生成的方法存根
-		Player player = game.getPlayerList().get(game.getCurrentPlayer());
+		Player player = game.getCurrentPlayer();
 		if(!player.getRevealedCards().isEmpty()) {
 			System.out.println("You have these revealed Rumour cards:");
 			for (RumourCard card : player.getRevealedCards()) {
