@@ -53,10 +53,14 @@ public class PetNewt extends RumourCard {
 				System.out.println("Take one of revealed Rumour cards into your hand");
 				Scanner scanner = new Scanner(System.in);
 				RumourCard choosedCard = getExsistRevealed.get(scanner.nextInt() - 1);
+				choosedCard.isUsed = false;
 				System.out.printf("You take %s into your hand\n", choosedCard.getCardName().toString());
 				player.addHand(choosedCard);
-				//current player takes next turn
-				game.setCurrentPlayer(game.getCurrentPlayer());
+				//choose the next player
+				System.out.println("Choose a player to play next turn");
+				player.chooseNextPlayer(game);
+				String nextIdentity = game.getCurrentPlayer().getIdentity().toString();
+				System.out.printf("The player you choose is a %s",nextIdentity);
 			}
 		super.isUsed = true;
 		} else {
