@@ -66,17 +66,15 @@ public class Player {
 	public void chooseNextPlayer(Game game) {
 		System.out.println("You choose which player to play next turn ?");
 		for (Player  player : game.getPlayerList()) {
+			if (player.equals(game.getCurrentPlayer())) {
+				continue;
+			}
 			System.out.printf("Player %d", player.getPlayerId());
 		}
 		Scanner scanner = new Scanner(System.in);
 		int choosedId = scanner.nextInt();
 		System.out.printf("You choose player %d to play next turn\n", choosedId);
-		for (Player player : game.getPlayerList()) {
-			if(player.getPlayerId() == choosedId) {
-				game.setCurrentPlayer(player);
-				break;
-			}
-		}
+		game.setCurrentPlayer(game.findPlayer(choosedId));
 	}
 	
 	public void discard(Game game) {

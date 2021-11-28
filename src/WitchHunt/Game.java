@@ -149,17 +149,17 @@ public class Game {
 	
 	
 	//take next turn
-	public void nextTurn() {
-		int currIndex = playerList.indexOf(currentPlayer);
-		int nextIndex = currIndex +1;
-		if(nextIndex == playerList.size()) {
-			nextIndex = 0;
-			currentPlayer = playerList.get(nextIndex);
-		}
-		else {
-			currentPlayer = playerList.get(nextIndex);
-		}
-	}
+//	public void nextTurn() {
+//		int currIndex = playerList.indexOf(currentPlayer);
+//		int nextIndex = currIndex +1;
+//		if(nextIndex == playerList.size()) {
+//			nextIndex = 0;
+//			currentPlayer = playerList.get(nextIndex);
+//		}
+//		else {
+//			currentPlayer = playerList.get(nextIndex);
+//		}
+//	}
 	public void playGame() {
 		
 		System.out.printf("Player %d, it's your turn\n", currentPlayer.getPlayerId());
