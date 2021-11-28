@@ -13,6 +13,7 @@ import RumourCards.Cauldron;
 import RumourCards.DuckingStool;
 import RumourCards.EvilEye;
 import RumourCards.HookedNose;
+import RumourCards.Pauldron;
 import RumourCards.PetNewt;
 import RumourCards.PointedHat;
 import RumourCards.RumourCard;
@@ -56,7 +57,7 @@ public class Game {
 		RumourCard angryMol = new AngryMol();
 		RumourCard blackCat = new BlackCat();
 		RumourCard broomstick = new Broomstick();
-		RumourCard cauldron = new Cauldron();
+		RumourCard cauldron = new Pauldron();
 		RumourCard duckingStool = new DuckingStool();
 		RumourCard evilEye = new EvilEye();
 		RumourCard hookedNose = new HookedNose();
