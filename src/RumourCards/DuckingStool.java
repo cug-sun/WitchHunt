@@ -1,10 +1,10 @@
 package RumourCards;
 
-import java.util.Iterator;
 import java.util.Scanner;
-
 import WitchHunt.Game;
+import WitchHunt.Identity;
 import WitchHunt.Player;
+
 
 public class DuckingStool extends RumourCard {
 	public static RumourCardName cardName = RumourCardName.Ducking_Stool;
@@ -39,9 +39,11 @@ public class DuckingStool extends RumourCard {
 		if (duckingTool) {
 			System.out.printf("Player %d has a revealed Wart, he/she can't be chosen by Ducking Stool!\n",chosenPlayer.getPlayerId());
 			game.setCurrentPlayer(player);
+			setIsUsed(false);
 		}
 		else {
 			game.setCurrentPlayer(chosenPlayer);
+			setIsUsed(true);
 		}
 		
 	}
@@ -67,9 +69,49 @@ public class DuckingStool extends RumourCard {
 		if (duckingTool) {
 			System.out.printf("Player %d has a revealed Wart, he/she can't be chosen by Ducking Stool!\n",chosenPlayer.getPlayerId());
 			game.setCurrentPlayer(player);
+			setIsUsed(false);
 		}
 		else {
-			System.out.println();
+			System.out.printf("Player %d, you must\n1.Reveal your identity\nor\n2.Discard a card from your hand\n",chosenPlayer.getPlayerId());
+			System.out.printf("You have %d Rumour cards\n", chosenPlayer.getHand().size());
+			if (chosenPlayer.isRevealed() == false) {
+				System.out.println("You identity is not revealed");
+			}
+			else if (chosenPlayer.isRevealed() == true) {
+				System.out.println("You identity is revealed");
+			}
+			System.out.println("Input your choice");
+			int choice = scanner.nextInt();
+			switch (choice) {
+			case 1: {
+				//Reveal identity
+				chosenPlayer.revealIdentity();
+				if(chosenPlayer.getIdentity() == Identity.Witch) {
+					System.out.printf("Player %d, you gain 1 point, you will take next turn\n",player.getPlayerId());
+					player.updatePoints(1);
+					game.setCurrentPlayer(player);
+					setIsUsed(true);
+				}
+				else if(chosenPlayer.getIdentity() == Identity.Villager) {
+					System.out.printf("Player %d, you lost 1 point, player %d will take next turn\n",player.getPlayerId(),chosenPlayer.getPlayerId());
+					player.updatePoints(-1);
+					game.setCurrentPlayer(chosenPlayer);
+					setIsUsed(true);
+				}
+				
+			}
+			case 2: {
+				//Discard a card from hand
+				chosenPlayer.discard(game);
+				System.out.println("You will take next turn");
+				game.setCurrentPlayer(chosenPlayer);
+				setIsUsed(true);
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + choice);
+			}
+			
+			
 		}
 		
 	}

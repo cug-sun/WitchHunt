@@ -25,7 +25,7 @@ public class Broomstick extends RumourCard {
 		Player player = game.getCurrentPlayer();
 		System.out.println("You will take next turn");
 		game.setCurrentPlayer(player);
-		
+		setIsUsed(true);
 	}
 
 	@Override
@@ -34,6 +34,7 @@ public class Broomstick extends RumourCard {
 		Player player = game.getCurrentPlayer();
 		System.out.println("Choose a player to play next turn");
 		player.chooseNextPlayer(game);
+		setIsUsed(true);
 		
 	}
 

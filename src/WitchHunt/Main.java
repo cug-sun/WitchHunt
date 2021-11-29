@@ -23,19 +23,9 @@ public class Main {
 //		witchHunt.playGame();
 		witchHunt.initPile();
 		witchHunt.distribute();
-		//test distribute
-//		for(Player player: witchHunt.getPlayerList()) {
-//			System.out.printf("Player %d\n",player.getPlayerId());
-//			for(RumourCard card: player.getHand()) {
-//				System.out.println(card.getCardName().toString());
-//			}
-//		}
-//		for (int i = 0; i < 5; i++) {
-//			witchHunt.nextTurn();
-//			System.out.println("Player "+witchHunt.getCurrentPlayer().getPlayerId());
-//		}
-//		witchHunt.displayUnaccusedPlayers();
-		witchHunt.getCurrentPlayer().chooseNextPlayer(witchHunt);
+//		witchHunt.playTurn();
+//		witchHunt.outOfGame();
+		witchHunt.playGame();
 		
 	}
 

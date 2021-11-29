@@ -31,16 +31,19 @@ public class PointedHat extends RumourCard {
 			}
 			System.out.println("Take one of your own revealed Rumour cards into your hand");
 			Scanner scanner = new Scanner(System.in);
-			RumourCard choosedCard = player.getRevealedCards().get(scanner.nextInt() - 1);
-			System.out.printf("You take %s into your hand\n", choosedCard.getCardName().toString());
-			player.addHand(choosedCard);
-			player.getRevealedCards().remove(choosedCard);
+			RumourCard chosenCard = player.getRevealedCards().get(scanner.nextInt() - 1);
+			chosenCard.setIsUsed(false);
+			System.out.printf("You take %s into your hand\n", chosenCard.getCardName().toString());
+			player.addHand(chosenCard);
+			player.getRevealedCards().remove(chosenCard);
 			//current player takes next turn
 			System.out.println("You will take next turn");
 			game.setCurrentPlayer(game.getCurrentPlayer());
+			setIsUsed(true);
 		}
 		else {
 			System.out.println("You don't have any revealed card");
+			setIsUsed(false);
 		}
 	}
 
@@ -55,15 +58,18 @@ public class PointedHat extends RumourCard {
 			}
 			System.out.println("Take one of your own revealed Rumour cards into your hand");
 			Scanner scanner = new Scanner(System.in);
-			RumourCard choosedCard = player.getRevealedCards().get(scanner.nextInt() - 1);
-			System.out.printf("You take %s into your hand\n", choosedCard.getCardName().toString());
-			player.addHand(choosedCard);
-			player.getRevealedCards().remove(choosedCard);
+			RumourCard chosenCard = player.getRevealedCards().get(scanner.nextInt() - 1);
+			chosenCard.setIsUsed(false);
+			System.out.printf("You take %s into your hand\n", chosenCard.getCardName().toString());
+			player.addHand(chosenCard);
+			player.getRevealedCards().remove(chosenCard);
 			//Choose another player to play next turn
 			player.chooseNextPlayer(game);
+			setIsUsed(true);
 		}
 		else {
 			System.out.println("You don't have any revealed card");
+			setIsUsed(false);
 		}
 	}
 

@@ -28,7 +28,7 @@ public class AngryMob extends RumourCard {
 		//take next turn
 		System.out.println("You will take next turn");
 		game.setCurrentPlayer(game.getCurrentPlayer());
-		setIsSuccess(true);
+		setIsUsed(true);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class AngryMob extends RumourCard {
 			if(broomStick) {
 				System.out.printf("Player %d has a revealed Broomstick, he/she can't be chosen by Angry Mob!\n",chosenPlayer.getPlayerId());
 				game.setCurrentPlayer(player);
-				setIsSuccess(false);
+				setIsUsed(false);
 			}
 			else {
 				chosenPlayer.revealIdentity();
@@ -69,12 +69,12 @@ public class AngryMob extends RumourCard {
 					player.updatePoints(2);
 					game.setCurrentPlayer(player);
 				}
-				setIsSuccess(true);
+				setIsUsed(true);
 			}		
 		}
 		else {
 			System.out.println(this.getCardName() + " is only playable if you have been revealed as a villager");
-			setIsSuccess(false);
+			setIsUsed(false);
 		}
 	}
 }

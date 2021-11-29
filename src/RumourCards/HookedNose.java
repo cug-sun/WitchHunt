@@ -35,6 +35,7 @@ public class HookedNose extends RumourCard {
 	    player.addHand(choosedCard);
 	    System.out.println("You will take next turn");
 	    game.setCurrentPlayer(player);
+	    setIsUsed(true);
 		
 	}
 
@@ -46,13 +47,14 @@ public class HookedNose extends RumourCard {
 		player.chooseNextPlayer(game);
 		//currentPlayer has changed to the next chosen player
 		Player chosenPlayer = game.getCurrentPlayer();
-		System.out.printf("Player %d has these Rumour cards, which one do you want to take ?\n",chosenPlayer.getPlayerId());
-		chosenPlayer.displayHand();
-		Scanner scanner = new Scanner(System.in);
-		RumourCard chosenCard = chosenPlayer.getHand().get(scanner.nextInt()-1);
-		System.out.printf("You take %s into your hand\n", chosenCard.getCardName().toString());
+		//get the randomly index of card in the hand
+		int index = (int) (Math.random()*chosenPlayer.getHand().size());
+		RumourCard chosenCard = chosenPlayer.getHand().get(index);
+		System.out.printf("You choose player %d to play next turn, you randomly take %s from his/her hand\n", 
+				chosenPlayer.getPlayerId(),chosenCard.getCardName().toString());
 		chosenPlayer.getHand().remove(chosenCard);
 		player.addHand(chosenCard);
+		setIsUsed(true);
 		
 	}
 

@@ -1,15 +1,15 @@
 package RumourCards;
 public abstract class RumourCard implements cardAbility {
 	//if this card is used successfully
-	protected boolean isSuccess;
+	protected boolean isUsed;
 	public RumourCard() {
-		this.isSuccess = false;
+		this.isUsed = false;
 	}
-	public void setIsSuccess(boolean isSuccess) {
-		this.isSuccess = isSuccess;
+	public void setIsUsed(boolean isSuccess) {
+		this.isUsed = isSuccess;
 	}
-	public boolean getIsSuccess() {
-		return this.isSuccess;
+	public boolean getIsUsed() {
+		return this.isUsed;
 	}
 	
 }

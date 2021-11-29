@@ -16,26 +16,39 @@ public class Player {
 	private int points;
 	//pile of revealed Rumour cards
 	private ArrayList<RumourCard> revealedCards;
+	//if this player is chosen by Evil Eye
+	private boolean evilEye;
 	
 	public Player(int playerId) {
 		this.playerId = playerId;
 		this.points = 0;
 		this.isIdRevealed = false;
 		this.hand = new ArrayList<RumourCard>();
-		revealedCards = new ArrayList<RumourCard>();
+		this.revealedCards = new ArrayList<RumourCard>();
+		this.evilEye = false;
 	}
 	//get field isIdReavealed
 	public boolean isRevealed() {
 		return this.isIdRevealed;
+	}
+	public void setIsRevealed(boolean isRevealed) {
+		this.isIdRevealed = isRevealed;
 	}
 	
 	public int getPlayerId() {
 		return this.playerId;
 	}
 	
+	public boolean isEvilEye() {
+		return evilEye;
+	}
+	public void setEvilEye(boolean evilEye) {
+		this.evilEye = evilEye;
+	}
 	public Identity getIdentity() {
 		return this.identity;
 	}
+	
 	
 	public ArrayList<RumourCard> getRevealedCards(){
 		return this.revealedCards;
@@ -126,6 +139,17 @@ public class Player {
 				//reveal identity card
 				System.out.println("You choose to revealed your identity card");
 				this.revealIdentity();
+				if (this.getIdentity() == Identity.Villager) {
+					System.out.printf("Player %d is a villager, player %d gains no point, player %d will play next turn\n",
+							this.getPlayerId(),accusePlayer.getPlayerId(),this.getPlayerId());
+					game.setCurrentPlayer(this);
+				}
+				else if (this.getIdentity() == Identity.Witch) {
+					System.out.printf("Player %d is a witch, player %d gains 1 point, player %d will play next turn\n",
+							this.getPlayerId(),accusePlayer.getPlayerId(),accusePlayer.getPlayerId());
+					game.setCurrentPlayer(accusePlayer);
+				}
+				break;
 			}
 			case 2: {
 				//resolve witch! effect
@@ -138,6 +162,7 @@ public class Player {
 				//add this card to revealed card pile
 				hand.remove(choosedCard);
 				revealedCards.add(choosedCard);
+				break;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + scanner.nextInt());

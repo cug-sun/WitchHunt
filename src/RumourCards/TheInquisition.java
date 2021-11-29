@@ -26,6 +26,7 @@ public class TheInquisition extends RumourCard {
 		player.discard(game);
 		System.out.println("You will take next turn");
 		game.setCurrentPlayer(game.getCurrentPlayer());
+		setIsUsed(true);
 	}
 
 	@Override
@@ -36,13 +37,15 @@ public class TheInquisition extends RumourCard {
 		if(player.isRevealed() == true && player.getIdentity() == Identity.Villager) {
 			System.out.println("Choose a player to play next turn, you can look at his/her identity");
 			player.chooseNextPlayer(game);
-			//currentPlayer has changed to the next choosen player 
+			//currentPlayer has changed to the next chosen player 
 			String nextIdentity = game.getCurrentPlayer().getIdentity().toString();
 			System.out.printf("The player you choose is a %s",nextIdentity);
+			setIsUsed(true);
 			
 		}
 		else {
 			System.out.println(this.getCardName() + " is only playable if you have been revealed as a villager");
+			setIsUsed(false);
 		}
 	}
 
