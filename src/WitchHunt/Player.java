@@ -85,9 +85,23 @@ public class Player {
 			System.out.printf("Player %d\n", player.getPlayerId());
 		}
 		Scanner scanner = new Scanner(System.in);
-		int choosedId = scanner.nextInt();
-		System.out.printf("You choose player %d to play next turn\n", choosedId);
-		game.setCurrentPlayer(game.findPlayer(choosedId));
+		boolean correct = true;
+		Player choosedPlayer;
+		do {
+			int choosedId = scanner.nextInt();
+			choosedPlayer = game.findPlayer(choosedId);
+			if (choosedPlayer != null) {
+				correct = false;
+				
+			}
+			else {
+				System.out.println("Invalide input! Input a correct playerId");
+				correct = true;
+			}
+		} while (correct);
+		
+		System.out.printf("You choose player %d to play next turn\n", choosedPlayer.getPlayerId());
+		game.setCurrentPlayer(game.findPlayer(choosedPlayer.getPlayerId()));
 	}
 	
 	public void discard(Game game) {

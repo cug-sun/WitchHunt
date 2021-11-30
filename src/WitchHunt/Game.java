@@ -50,6 +50,7 @@ public class Game {
 	}
 	
 	public void shuffleCard() {
+		System.out.println("Shuffle rumour cards...");
 		Collections.shuffle(cardPile);
 	}
 	//initialize the rumours cards,add them to pile
@@ -100,6 +101,7 @@ public class Game {
 	
 	
 	public void distribute() {
+		System.out.println("Distribute rumour cards...");
 		int nHand = nHumourCards/nPlayer;
 		Iterator<RumourCard> it = cardPile.iterator();
 		for (Player player : playerList) {
@@ -182,6 +184,7 @@ public class Game {
 					player.setIsRevealed(false);
 				}
 				initPile();
+				distribute();
 			}
 		}
 		
@@ -198,6 +201,11 @@ public class Game {
 		switch (scanner.nextInt()) {
 		case 1: {
 			//Accuse another player of being a Witch
+			
+			
+			/*
+			 * if this player is chosen by Evil Eye,he must accuse a player other than the player who accuses him
+			 */
 			System.out.println("You choose to accuse another player of being a Witch\nWhich player ?");
 			displayUnaccusedPlayers();
 			int choosedId = scanner.nextInt();
@@ -275,6 +283,7 @@ public class Game {
 		Player max = playerList.stream().max(Comparator.comparing(player -> player.getPoint())).get();
 		if(max.getPoint() >= 5) {
 			System.out.printf("Game ends, player %d wins, he has %d points\n",max.getPlayerId(),max.getPoint());
+			setCurrentPlayer(max);
 			return true;
 		}
 		else {
@@ -319,14 +328,25 @@ public class Game {
 	//find a player by his playerId
 	public Player findPlayer(int id) {
 		Player target = null;
+		boolean find = false;
 		Iterator<Player> iterator = playerList.iterator();
 		while (iterator.hasNext()) {
 			target = iterator.next();
 			if (target.getPlayerId()==id) {
+				find = true;
 				break;
 			}
 		}
-		return target;
+		if (find) {
+			return target;
+			
+		}
+		else {
+			return null;
+		}
+		
 	}
+	
+	
 	
 }

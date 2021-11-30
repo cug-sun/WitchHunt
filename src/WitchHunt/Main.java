@@ -1,8 +1,6 @@
 package WitchHunt;
-import RumourCards.AngryMob;
-import RumourCards.RumourCard;
-import RumourCards.RumourCardName;
-import RumourCards.TheInquisition;
+
+
 
 public class Main {
 
@@ -25,7 +23,9 @@ public class Main {
 		witchHunt.distribute();
 //		witchHunt.playTurn();
 //		witchHunt.outOfGame();
-		witchHunt.playGame();
+//		witchHunt.playGame();
+		witchHunt.getCurrentPlayer().chooseNextPlayer(witchHunt);
+
 		
 	}
 
