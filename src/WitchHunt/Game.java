@@ -234,7 +234,7 @@ public class Game {
 			accuse[0] = currentPlayer.getPlayerId();
 			accuse[1] = accusedPlayer.getPlayerId();
 			//the accused player acts
-			accusedPlayer.beingAccuesd(currentPlayer,this);
+			accusedPlayer.beingAccuesd(this);
 			//setCurrentPlayer(accusedPlayer);
 			}
 			break;
