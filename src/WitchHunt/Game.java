@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
+
 import RumourCards.AngryMob;
 import RumourCards.BlackCat;
 import RumourCards.Broomstick;
@@ -165,28 +167,38 @@ public class Game {
 	}
 	
 	public void playGame() {
-		while (!isGameEnd()) {
+
+		while(true) {
 			playTurn();
 			outOfGame();
 			if (isRoundEnd()) {
-				//reset
-				playerList.addAll(outPlayerList);
-				Collections.sort(playerList, new Comparator<Player>() {
-					public int compare(Player p1, Player p2) {
-					    return Integer.compare(p1.getPlayerId(), p2.getPlayerId());
-					};
-				});	
-				chooseIdentity();
-				for (Player player : playerList) {
-					player.getHand().clear();
-					player.getRevealedCards().clear();
-					player.setEvilEye(false);
-					player.setIsRevealed(false);
+				if(isGameEnd()) {
+					break;
 				}
-				initPile();
-				distribute();
+				else {
+					//reset
+					playerList.addAll(outPlayerList);
+					outPlayerList.clear();
+					Collections.sort(playerList, new Comparator<Player>() {
+						public int compare(Player p1, Player p2) {
+						    return Integer.compare(p1.getPlayerId(), p2.getPlayerId());
+						};
+					});	
+					//score board
+					scoreBoard();
+					chooseIdentity();
+					for (Player player : playerList) {
+						player.getHand().clear();
+						player.getRevealedCards().clear();
+						player.setEvilEye(false);
+						player.setIsRevealed(false);
+					}
+					initPile();
+					distribute();
+				}
+				
 			}
-		}
+		} 
 		
 		
 	}
@@ -292,7 +304,10 @@ public class Game {
 	}
 	
 	public void scoreBoard() {
-		
+		System.out.println("Scoreboard:");
+		for (Player player : playerList) {
+			System.out.printf("Player %d: %d points\n", player.getPlayerId(),player.getPoint());
+		}
 	}
 	
 	//display all the players except current player

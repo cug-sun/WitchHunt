@@ -1,6 +1,6 @@
 package WitchHunt;
 
-
+import java.util.Iterator;
 
 public class Main {
 
@@ -15,16 +15,15 @@ public class Main {
 //		aPlayer.revealIdentity();
 //		aPlayer.revealIdentity();
 //		witchHunt.playerList.get(0).revealIdentity();
-//		RumourCard angryMol = new TheInquisition();
-//		angryMol.
-		//witchHunt.displayPlayers();
-//		witchHunt.playGame();
+
 		witchHunt.initPile();
 		witchHunt.distribute();
+		witchHunt.playGame();
 //		witchHunt.playTurn();
 //		witchHunt.outOfGame();
-//		witchHunt.playGame();
-		witchHunt.getCurrentPlayer().chooseNextPlayer(witchHunt);
+
+		
+//		witchHunt.getCurrentPlayer().chooseNextPlayer(witchHunt);
 
 		
 	}

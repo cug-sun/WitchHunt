@@ -39,7 +39,7 @@ public class Toad extends RumourCard {
 					//Determine the identity
 					if(player.getIdentity() == Identity.Villager) {
 						//choose a player to take the turn
-						System.out.println("you can choose the player who will take the turn");
+						System.out.println("you can choose the player to play next turn");
 						player.chooseNextPlayer(game);
 								
 					}
@@ -49,11 +49,13 @@ public class Toad extends RumourCard {
 						if(leftIndex == game.getPlayerList().size()) {
 							leftIndex = 0;
 							Player chosenPlayer = game.getPlayerList().get(leftIndex);
+							System.out.printf("Player %d chooses the player to his/her left to play next turn\n",player.getPlayerId());
 							game.setCurrentPlayer(chosenPlayer);
 							setIsUsed(true);
 						}
 						else {
 							Player chosenPlayer = game.getPlayerList().get(leftIndex);
+							System.out.printf("Player %d chooses the player to his/her left to play next turn\n",player.getPlayerId());
 							game.setCurrentPlayer(chosenPlayer);
 							setIsUsed(true);
 						}
