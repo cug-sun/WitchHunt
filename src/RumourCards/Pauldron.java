@@ -11,24 +11,24 @@ public class Pauldron extends RumourCard {
 
 	public Pauldron() {
 		super();
-		// TODO 自动生成的构造函数存根
+		// TODO 鑷姩鐢熸垚鐨勬瀯閫犲嚱鏁板瓨鏍�
 	}
 
 	@Override
 	public RumourCardName getCardName() {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		return cardName;
 	}
 
 	@Override
 	public void witchEffect(Game game) {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		Player player = game.getCurrentPlayer();
 		System.out.println("The player who accused you discards a random card from their hand");
 		Player accusePlayer = game.findPlayer(game.getAccuse()[0]);
 		
 		//Randomly select the discard
-		RumourCard chosenCard = player.getHand().get((int)(Math.random() * (player.getHand().size())));
+		RumourCard chosenCard = game.findPlayer(game.getAccuse()[0]).getHand().get((int)(Math.random() * (player.getHand().size())));
 		System.out.printf("Player %d randomly discards %s from his/her hand\n",accusePlayer.getPlayerId(),chosenCard.getCardName().toString());
 	    accusePlayer.getHand().remove(chosenCard);
 	    game.getDiscardPile().add(chosenCard);
@@ -38,7 +38,7 @@ public class Pauldron extends RumourCard {
 
 	@Override
 	public void huntEffect(Game game) {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		//reveal your identity
 		Player player = game.getCurrentPlayer();
 				
