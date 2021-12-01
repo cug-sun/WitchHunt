@@ -216,7 +216,7 @@ public class Game {
 				if(player == currentPlayer) {
 					continue;
 				}
-				else if (player.getEvilEye() == currentPlayer.getEvilEye()) {
+				else if (player.getPlayerId() == currentPlayer.getEvilEye()) {
 					continue;
 				}
 				else {

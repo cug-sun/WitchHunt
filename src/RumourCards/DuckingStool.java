@@ -57,7 +57,7 @@ public class DuckingStool extends RumourCard {
 		System.out.println("You choose which player ?");
 		game.displayPlayers();
 		Scanner scanner = new Scanner(System.in);
-		Player chosenPlayer = game.getPlayerList().get(scanner.nextInt()-1);
+		Player chosenPlayer = game.findPlayer(scanner.nextInt());
 		boolean duckingTool = false;
 		//when a player has a revealed Wart, he/she can't be chosen by Ducking Stool
 		for (RumourCard card : chosenPlayer.getRevealedCards()) {
@@ -91,14 +91,16 @@ public class DuckingStool extends RumourCard {
 					player.updatePoints(1);
 					game.setCurrentPlayer(player);
 					setIsUsed(true);
+					break;
 				}
 				else if(chosenPlayer.getIdentity() == Identity.Villager) {
 					System.out.printf("Player %d, you lost 1 point, player %d will take next turn\n",player.getPlayerId(),chosenPlayer.getPlayerId());
 					player.updatePoints(-1);
 					game.setCurrentPlayer(chosenPlayer);
 					setIsUsed(true);
+					break;
 				}
-				break;
+				
 				
 			}
 			case 2: {
