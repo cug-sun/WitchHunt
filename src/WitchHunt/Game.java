@@ -228,6 +228,7 @@ public class Game {
 					}
 				}
 			}
+			currentPlayer.setEvilEye(0);
 			Scanner scanner = new Scanner(System.in);
 			int chosenId = scanner.nextInt();
 			Player accusedPlayer = findPlayer(chosenId);
