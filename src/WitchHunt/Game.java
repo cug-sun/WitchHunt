@@ -222,11 +222,20 @@ public class Game {
 			displayUnaccusedPlayers();
 			int choosedId = scanner.nextInt();
 			Player accusedPlayer = findPlayer(choosedId);
+			
+			//this player can or cant be accused
+			if(accusedPlayer.isRevealed() == true) {
+				System.out.println("this player'identity is revealed, you cant accuse him/her");
+				setCurrentPlayer(currentPlayer);
+			}else {
+			
+			
 			accuse[0] = currentPlayer.getPlayerId();
 			accuse[1] = accusedPlayer.getPlayerId();
 			//the accused player acts
 			accusedPlayer.beingAccuesd(currentPlayer,this);
 			//setCurrentPlayer(accusedPlayer);
+			}
 			break;
 			
 		}
