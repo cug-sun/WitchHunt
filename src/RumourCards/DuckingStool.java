@@ -98,6 +98,7 @@ public class DuckingStool extends RumourCard {
 					game.setCurrentPlayer(chosenPlayer);
 					setIsUsed(true);
 				}
+				break;
 				
 			}
 			case 2: {
@@ -106,6 +107,7 @@ public class DuckingStool extends RumourCard {
 				System.out.println("You will take next turn");
 				game.setCurrentPlayer(chosenPlayer);
 				setIsUsed(true);
+				break;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + choice);

@@ -17,7 +17,7 @@ public class Player {
 	//pile of revealed Rumour cards
 	private ArrayList<RumourCard> revealedCards;
 	//if this player is chosen by Evil Eye
-	private boolean evilEye;
+	private int evilEye;
 	
 	public Player(int playerId) {
 		this.playerId = playerId;
@@ -25,7 +25,7 @@ public class Player {
 		this.isIdRevealed = false;
 		this.hand = new ArrayList<RumourCard>();
 		this.revealedCards = new ArrayList<RumourCard>();
-		this.evilEye = false;
+		this.evilEye = 0;
 	}
 	//get field isIdReavealed
 	public boolean isRevealed() {
@@ -39,10 +39,10 @@ public class Player {
 		return this.playerId;
 	}
 	
-	public boolean isEvilEye() {
+	public int getEvilEye() {
 		return evilEye;
 	}
-	public void setEvilEye(boolean evilEye) {
+	public void setEvilEye(int evilEye) {
 		this.evilEye = evilEye;
 	}
 	public Identity getIdentity() {
