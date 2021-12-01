@@ -158,11 +158,13 @@ public class Player {
 				if (this.getIdentity() == Identity.Villager) {
 					System.out.printf("Player %d is a villager, player %d gains no point, player %d will play next turn\n",
 							this.getPlayerId(),accusePlayer.getPlayerId(),this.getPlayerId());
+					accusePlayer.updatePoints(0);
 					game.setCurrentPlayer(accusedPlayer);
 				}
 				else if (this.getIdentity() == Identity.Witch) {
 					System.out.printf("Player %d is a witch, player %d gains 1 point, player %d will play next turn\n",
 							this.getPlayerId(),accusePlayer.getPlayerId(),accusePlayer.getPlayerId());
+					accusePlayer.updatePoints(1);
 					game.setCurrentPlayer(accusePlayer);
 				}
 				break;
