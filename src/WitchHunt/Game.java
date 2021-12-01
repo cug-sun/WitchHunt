@@ -186,6 +186,7 @@ public class Game {
 					});	
 					//score board
 					scoreBoard();
+					System.out.println("Start new round...\n");
 					chooseIdentity();
 					for (Player player : playerList) {
 						player.getHand().clear();
@@ -225,30 +226,38 @@ public class Game {
 			accuse[0] = currentPlayer.getPlayerId();
 			accuse[1] = accusedPlayer.getPlayerId();
 			//the accused player acts
-			accusedPlayer.beingAccuesd(currentPlayer,this);
-			//setCurrentPlayer(accusedPlayer);
+			accusedPlayer.beingAccuesd(this);
+//			setCurrentPlayer(accusedPlayer);
 			break;
 			
 		}
 		case 2: {
 			//Reveal a Rumour card from hand, resolving its Hunt! effect
-			System.out.println("You have these revealed Rumour cards:");
-			currentPlayer.displayHand();
-			System.out.println("Which card do you want to use ?");
-			RumourCard choosedCard = currentPlayer.getHand().get(scanner.nextInt()-1);
-			System.out.printf("You choose to use %s\n",choosedCard.getCardName().toString());
-			choosedCard.huntEffect(this);
-			if (choosedCard.getIsUsed() == true) {
-				currentPlayer.getHand().remove(choosedCard);
-				//after using Black Cat, discard it
-				if (choosedCard.getCardName() == RumourCardName.Black_Cat) {
-					discardPile.add(choosedCard);
+			if(!currentPlayer.getHand().isEmpty()) {
+				System.out.println("You have these Rumour cards:");
+				currentPlayer.displayHand();
+				System.out.println("Which card do you want to use ?");
+				RumourCard choosedCard = currentPlayer.getHand().get(scanner.nextInt()-1);
+				System.out.printf("You choose to use %s\n",choosedCard.getCardName().toString());
+				choosedCard.huntEffect(this);
+				if (choosedCard.getIsUsed() == true) {
+					currentPlayer.getHand().remove(choosedCard);
+					//after using Black Cat, discard it
+					if (choosedCard.getCardName() == RumourCardName.Black_Cat) {
+						discardPile.add(choosedCard);
+					}
+					else {
+						currentPlayer.getRevealedCards().add(choosedCard);
+					}
 				}
-				else {
-					currentPlayer.getRevealedCards().add(choosedCard);
-				}
+				break;
 			}
-			break;
+			else {
+				System.out.println("You don't have any card in hand! You must accuse another player of being a witch");
+				setCurrentPlayer(currentPlayer);
+				break;
+			}
+			
 			
 		}
 		default:
@@ -269,20 +278,25 @@ public class Game {
 		}
 	}
 	public boolean isRoundEnd() {
-		if(playerList.size() == 1) {
-			for(Player player: playerList) {
-				System.out.printf("This round ends, player %d remains, he/she wins the round\n",player.getPlayerId());
-				if(player.getIdentity() == Identity.Villager) {
-					System.out.println("He/She is a villager, gains 1 point");
-					player.updatePoints(1);
-				}
-				else if (player.getIdentity() == Identity.Witch) {
-					System.out.println("He/She is a witch, gains 2 point");
-					player.updatePoints(2);
-				}
+		int nUnrevealedPlayer = 0;
+		Player roundWinner = null;
+		for (Player player : playerList) {
+			if(player.isRevealed() == false) {
+				nUnrevealedPlayer ++;
+				roundWinner = player;
+			}
+		}
+		if (nUnrevealedPlayer == 1) {
+			System.out.printf("This round ends, player %d remains, he/she wins the round\n",roundWinner.getPlayerId());
+			if(roundWinner.getIdentity() == Identity.Villager) {
+				System.out.println("He/She is a villager, gains 1 point");
+				roundWinner.updatePoints(1);
+			}
+			else if (roundWinner.getIdentity() == Identity.Witch) {
+				System.out.println("He/She is a witch, gains 2 point");
+				roundWinner.updatePoints(2);
 			}
 			return true;
-			
 		}
 		else {
 			return false;
@@ -332,7 +346,7 @@ public class Game {
 					System.out.printf("Player %d\n", player.getPlayerId());
 				}
 				else {
-					System.out.printf("Player %d is a %s", player.getPlayerId(),player.getIdentity().toString());
+					System.out.printf("Player %d has been revealed as a %s\n", player.getPlayerId(),player.getIdentity().toString());
 				}
 			}
 			

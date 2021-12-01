@@ -139,7 +139,9 @@ public class Player {
 
 	}
 	//when a player is accused to be a witch
-	public void beingAccuesd(Player accusePlayer,Game game) {
+	public void beingAccuesd(Game game) {
+		Player accusePlayer = game.findPlayer(game.getAccuse()[0]);
+		Player accusedPlayer = game.findPlayer(game.getAccuse()[1]);
 		if (!this.hand.isEmpty()) {
 			System.out.printf("Player %d, you are accused by player %d\n", this.getPlayerId(),accusePlayer.getPlayerId());
 			System.out.println("You must either:\n" + 
@@ -156,7 +158,7 @@ public class Player {
 				if (this.getIdentity() == Identity.Villager) {
 					System.out.printf("Player %d is a villager, player %d gains no point, player %d will play next turn\n",
 							this.getPlayerId(),accusePlayer.getPlayerId(),this.getPlayerId());
-					game.setCurrentPlayer(this);
+					game.setCurrentPlayer(accusedPlayer);
 				}
 				else if (this.getIdentity() == Identity.Witch) {
 					System.out.printf("Player %d is a witch, player %d gains 1 point, player %d will play next turn\n",
@@ -167,6 +169,7 @@ public class Player {
 			}
 			case 2: {
 				//resolve witch! effect
+				game.setCurrentPlayer(this);
 				System.out.println("You choose to reveal a Rumour card from you hand and resolving its Witch? effect");
 				System.out.println("You have these Rumour cards in your hand, which one do you want to use ?");
 				this.displayHand();
@@ -191,13 +194,6 @@ public class Player {
 	public void setIdentity(Identity identity) {
 		this.identity = identity;
 	}
-	/*
-	 * Reveal a Rumour card from your hand and 
-	 * play it face up in front of yourself, resolving
-	 * its Hunt! effect
-	 */
-	public void revealCard() {
-		
-	}
+	
 	
 }
