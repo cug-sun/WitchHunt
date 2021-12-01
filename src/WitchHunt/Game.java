@@ -296,7 +296,7 @@ public class Game {
 			}
 		}
 		if (nUnrevealedPlayer == 1) {
-			System.out.printf("This round ends, player %d remains, he/she wins the round\n",roundWinner.getPlayerId());
+			System.out.printf("This round ends, player %d remains with a unrevealed identity card, he/she wins the round\n",roundWinner.getPlayerId());
 			if(roundWinner.getIdentity() == Identity.Villager) {
 				System.out.println("He/She is a villager, gains 1 point");
 				roundWinner.updatePoints(1);
