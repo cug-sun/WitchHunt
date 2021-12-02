@@ -183,6 +183,9 @@ public class Player {
 					hand.remove(chosenCard);
 					revealedCards.add(chosenCard);
 				}
+				else {
+					this.beingAccuesd(game);
+				}
 				break;
 			}
 			default:
