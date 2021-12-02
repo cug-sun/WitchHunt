@@ -383,9 +383,26 @@ public class Game {
 		Player max = playerList.stream().max(Comparator.comparing(player -> player.getPoint())).get();
 		if(max.getPoint() >= 5) {
 			//if this player is the only one
-			int isOnly = 0;
+			ArrayList<Player> winner = new ArrayList<Player>();
+			for(Player player: playerList) {
+				if (player.getPoint() == max.getPoint()) {
+					winner.add(player);
+				}
+			}
+			if(winner.size() == 1) {
+				System.out.printf("Game ends, player %d wins, he/she has %d points\n",max.getPlayerId(),max.getPoint());
+			}
+			else {
+				System.out.print("Game ends, but it is tied, then players will have a high-stakes “monkey knife fight” and duel to the death. The survivor wins.\n");
+				for (Player player : winner) {
+					System.out.printf("player %d ",player.getPlayerId());
+				}
+				System.out.println("will play a monkey knife fight!");
+				System.out.println("Playing...");
+				Player survivor = winner.get((int)(Math.random() * (winner.size())));
+				System.out.printf("Survivor is player %d! he/she wins, he/she has %d points\n",survivor.getPlayerId(),survivor.getPoint());
+			}
 			
-			System.out.printf("Game ends, player %d wins, he/she has %d points\n",max.getPlayerId(),max.getPoint());
 			
 			return true;
 		}
