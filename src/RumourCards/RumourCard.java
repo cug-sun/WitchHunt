@@ -5,8 +5,8 @@ public abstract class RumourCard implements cardAbility {
 	public RumourCard() {
 		this.isUsed = false;
 	}
-	public void setIsUsed(boolean isSuccess) {
-		this.isUsed = isSuccess;
+	public void setIsUsed(boolean isUsed) {
+		this.isUsed = isUsed;
 	}
 	public boolean getIsUsed() {
 		return this.isUsed;

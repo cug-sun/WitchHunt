@@ -233,9 +233,9 @@ public class Game {
 			int chosenId = scanner.nextInt();
 			Player accusedPlayer = findPlayer(chosenId);
 			
-			//this player can or can't be accused
+			//whether this player can be accused
 			if(accusedPlayer.isRevealed() == true) {
-				System.out.println("this player'identity is revealed, you can't accuse him/her");
+				System.out.println("This player's identity is revealed, you can't accuse him/her");
 				setCurrentPlayer(currentPlayer);
 			}
 			else {
@@ -246,6 +246,8 @@ public class Game {
 			//setCurrentPlayer(accusedPlayer);
 			}
 		}
+		
+		
 		else {
 			System.out.printf("Player %d, it's your turn\n", currentPlayer.getPlayerId());
 			System.out.println("you must either:\n" +
@@ -276,6 +278,7 @@ public class Game {
 				
 			}
 			case 2: {
+				Player player = currentPlayer;
 				//Reveal a Rumour card from hand, resolving its Hunt! effect
 				if(!currentPlayer.getHand().isEmpty()) {
 					System.out.println("You have these Rumour cards:");
@@ -283,15 +286,16 @@ public class Game {
 					System.out.println("Which card do you want to use ?");
 					RumourCard choosedCard = currentPlayer.getHand().get(scanner.nextInt()-1);
 					System.out.printf("You choose to use %s\n",choosedCard.getCardName().toString());
+					//current player may have been changed
 					choosedCard.huntEffect(this);
 					if (choosedCard.getIsUsed() == true) {
-						currentPlayer.getHand().remove(choosedCard);
+						player.getHand().remove(choosedCard);
 						//after using Black Cat, discard it
 						if (choosedCard.getCardName() == RumourCardName.Black_Cat) {
 							discardPile.add(choosedCard);
 						}
 						else {
-							currentPlayer.getRevealedCards().add(choosedCard);
+							player.getRevealedCards().add(choosedCard);
 						}
 					}
 					break;
@@ -316,7 +320,7 @@ public class Game {
 		for(Iterator<Player> it = playerList.iterator();it.hasNext();) {
 			Player player = it.next();
 			if(player.isRevealed() == true && player.getIdentity() == Identity.Witch) {
-				System.out.printf("Player %d is a witch, he/she is out of game\n", player.getPlayerId());
+				System.out.printf("Player %d is a Witch, he/she is out of game\n", player.getPlayerId());
 				it.remove();
 				outPlayerList.add(player);
 				
@@ -335,11 +339,11 @@ public class Game {
 		if (nUnrevealedPlayer == 1) {
 			System.out.printf("This round ends, player %d remains with a unrevealed identity card, he/she wins the round\n",roundWinner.getPlayerId());
 			if(roundWinner.getIdentity() == Identity.Villager) {
-				System.out.println("He/She is a villager, gains 1 point");
+				System.out.println("He/She is a Villager, gains 1 point");
 				roundWinner.updatePoints(1);
 			}
 			else if (roundWinner.getIdentity() == Identity.Witch) {
-				System.out.println("He/She is a witch, gains 2 point");
+				System.out.println("He/She is a Witch, gains 2 point");
 				roundWinner.updatePoints(2);
 			}
 			setCurrentPlayer(roundWinner);
