@@ -1,5 +1,7 @@
 package RumourCards;
 
+import java.util.Scanner;
+
 import WitchHunt.Game;
 import WitchHunt.Identity;
 import WitchHunt.Player;
@@ -23,9 +25,24 @@ public class TheInquisition extends RumourCard {
 	public void witchEffect(Game game) {
 		// TODO 自动生成的方法存根
 		Player player = game.getCurrentPlayer();
-		player.discard(game);
-		System.out.println("You will take next turn");
-		game.setCurrentPlayer(game.getCurrentPlayer());
+		
+		if(player.getHand().size() > 1) {
+			System.out.println("You have these Rumour cards:");
+			for (RumourCard rumourCard : player.getHand()) {
+				if(rumourCard.getCardName() == RumourCardName.The_Inquisition) {
+					continue;
+				}
+				System.out.printf("%d. %s\n", player.getHand().indexOf(rumourCard)+1, rumourCard.getCardName().toString() );
+			}
+			System.out.println("Which card will you discard ?");
+			Scanner scanner = new Scanner(System.in);
+			RumourCard discarded = player.getHand().remove(scanner.nextInt()-1);
+			System.out.println("You discard " + discarded.getCardName().toString());
+			game.discardPile.add(discarded);
+		}
+		else {
+			System.out.println("You don't have any card in hand!");
+		}
 		setIsUsed(true);
 	}
 
