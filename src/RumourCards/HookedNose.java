@@ -50,8 +50,7 @@ public class HookedNose extends RumourCard {
 		//get the randomly index of card in the hand
 		int index = (int) (Math.random()*chosenPlayer.getHand().size());
 		RumourCard chosenCard = chosenPlayer.getHand().get(index);
-		System.out.printf("You choose player %d to play next turn, you randomly take %s from his/her hand\n", 
-				chosenPlayer.getPlayerId(),chosenCard.getCardName().toString());
+		System.out.printf("You randomly take %s from his/her hand\n",chosenCard.getCardName().toString());
 		chosenPlayer.getHand().remove(chosenCard);
 		player.addHand(chosenCard);
 		setIsUsed(true);

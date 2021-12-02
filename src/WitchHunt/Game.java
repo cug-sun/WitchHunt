@@ -211,20 +211,39 @@ public class Game {
 		if (currentPlayer.getEvilEye() != 0) {
 			System.out.printf("Player %d, you are chosen by Evil Eye, you must accuse a player other than player %d if possible\n", 
 					currentPlayer.getPlayerId(), currentPlayer.getEvilEye());
-			System.out.println("You choose to accuse another player of being a Witch\nWhich player ?");
-			for (Player player : playerList) {
-				if(player == currentPlayer) {
-					continue;
-				}
-				else if (player.getPlayerId() == currentPlayer.getEvilEye()) {
-					continue;
-				}
-				else {
-					if (player.isRevealed() == false) {
-						System.out.printf("Player %d\n", player.getPlayerId());
+			System.out.println("You can accuse another player of being a Witch\nWhich player ?");
+			if (playerList.size() > 2) {
+				for (Player player : playerList) {
+					if(player == currentPlayer) {
+						continue;
+					}
+					else if (player.getPlayerId() == currentPlayer.getEvilEye()) {
+						continue;
 					}
 					else {
-						System.out.printf("Player %d has been revealed as a %s\n", player.getPlayerId(),player.getIdentity().toString());
+						if (player.isRevealed() == false) {
+							System.out.printf("Player %d\n", player.getPlayerId());
+						}
+						else {
+							System.out.printf("Player %d has been revealed as a %s\n", player.getPlayerId(),player.getIdentity().toString());
+						}
+					}
+				}
+			}
+			else {
+				//if there are only 2 players, then must accuse the player who used Evil Eye
+				System.out.println("There are only 2 players...");
+				for (Player player : playerList) {
+					if(player == currentPlayer) {
+						continue;
+					}
+					else {
+						if (player.isRevealed() == false) {
+							System.out.printf("Player %d\n", player.getPlayerId());
+						}
+						else {
+							System.out.printf("Player %d has been revealed as a %s\n", player.getPlayerId(),player.getIdentity().toString());
+						}
 					}
 				}
 			}
