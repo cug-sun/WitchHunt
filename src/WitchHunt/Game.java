@@ -44,7 +44,25 @@ public class Game {
 		System.out.println("Choose the number of players (3-6)");
 		Scanner scanner = new Scanner(System.in);
 		//set the number of players
-		this.nPlayer = scanner.nextInt();
+		while (true) {
+			try {
+				nPlayer = scanner.nextInt();
+				if (nPlayer > 6 || nPlayer < 3 ) {
+					System.out.println("Invalide input! Input again");
+					scanner = new Scanner(System.in);
+				}
+				else {
+					break;
+				}
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Invalide input! Input again");
+				scanner = new Scanner(System.in);
+			}
+		}
+		
+		
 		
 		System.out.println(this.nPlayer + " players");
 		System.out.println("Each player will have " + Game.nHumourCards/this.nPlayer + " Rumour Cards" );
@@ -130,21 +148,45 @@ public class Game {
 		for (Player player : playerList) {
 			System.out.printf("Player %d chooses to be a 1.Villager 2.Witch\n",player.getPlayerId());
 			Scanner scanner = new Scanner(System.in);
-			int identity = scanner.nextInt();
-			switch (identity) {
-			case 1: {
-				player.setIdentity(Identity.Villager);
-				break;
+			while (true) {
+				int identity = scanner.nextInt();
+				if (identity < 1 || identity > 2) {
+					System.out.println("Invalide input! Input again");
+					scanner = new Scanner(System.in);
+				}
+				else {
+					switch (identity) {
+					case 1: {
+						player.setIdentity(Identity.Villager);
+						break;
+					}
+					case 2: {
+						player.setIdentity(Identity.Witch);
+						break;
+					}
+//					default:
+//						throw new IllegalArgumentException("Unexpected value: " + scanner);
+					}
+					break;
+				}
+				
 			}
-			case 2: {
-				player.setIdentity(Identity.Witch);
-				break;
+			
 			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + scanner);
-			}
+//			switch (identity) {
+//			case 1: {
+//				player.setIdentity(Identity.Villager);
+//				break;
+//			}
+//			case 2: {
+//				player.setIdentity(Identity.Witch);
+//				break;
+//			}
+//			default:
+//				throw new IllegalArgumentException("Unexpected value: " + scanner);
+//			}
 		}
-	}
+	
 	
 	public ArrayList<Player> getPlayerList(){
 		return this.playerList;
