@@ -322,6 +322,8 @@ public class Game {
 		
 		else {
 			System.out.printf("Player %d, it's your turn\n", currentPlayer.getPlayerId());
+			System.out.println("You have these cards:");
+			currentPlayer.displayHand();
 			System.out.println("you must either:\n" +
 					"1.Accuse another player of being a Witch.\nor\n"
 					+ "2.Reveal a Rumour card from your hand and play it face up in front of yourself, resolving its Hunt! effect.");

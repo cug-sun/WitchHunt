@@ -5,6 +5,7 @@ import java.util.Scanner;
 import RumourCards.RumourCard;
 
 
+
 public class Player {
 	private int playerId;
 	private ArrayList<RumourCard> hand;
@@ -150,6 +151,8 @@ public class Player {
 					"2.Reveal a Rumour card from you hand and"
 					+ " play it face up in front of yourself, "
 					+ "resolving its Witch? effect.");
+			System.out.println("You have these cards:");
+			this.displayHand();
 			Scanner scanner = new Scanner(System.in);
 			switch (scanner.nextInt()) {
 			case 1: {
