@@ -68,7 +68,7 @@ public class PointedHat extends RumourCard {
 			setIsUsed(true);
 		}
 		else {
-			System.out.println("You don't have any revealed card");
+			System.out.println("You don't have any revealed card!");
 			setIsUsed(false);
 		}
 	}
