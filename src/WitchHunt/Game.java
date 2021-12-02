@@ -381,7 +381,8 @@ public class Game {
 				
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + scanner);
+//				throw new IllegalArgumentException("Unexpected value: " + scanner);
+				System.out.println("Invalide input! Input again");
 			}
 		}
 		
