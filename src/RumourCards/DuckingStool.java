@@ -73,13 +73,14 @@ public class DuckingStool extends RumourCard {
 		}
 		else {
 			System.out.printf("Player %d, you must\n1.Reveal your identity\nor\n2.Discard a card from your hand\n",chosenPlayer.getPlayerId());
-			System.out.printf("You have %d Rumour cards\n", chosenPlayer.getHand().size());
-			if (chosenPlayer.isRevealed() == false) {
-				System.out.println("You identity is not revealed");
-			}
-			else if (chosenPlayer.isRevealed() == true) {
-				System.out.println("You identity is revealed");
-			}
+//			System.out.printf("You have %d Rumour cards\n", chosenPlayer.getHand().size());
+//			if (chosenPlayer.isRevealed() == true && chosenPlayer.getHand().isEmpty() == true) {
+//				System.out.printf("Player %d doesn't have any Rumour card and his identity card has been revealed...\n");
+//				game.setCurrentPlayer(chosenPlayer);
+//			}
+//			if (chosenPlayer.isRevealed() == false) {
+//				System.out.println("You identity is not revealed");
+//			}
 			System.out.println("Input your choice");
 			int choice = scanner.nextInt();
 			switch (choice) {

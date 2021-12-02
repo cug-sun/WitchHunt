@@ -140,6 +140,7 @@ public class Player {
 	}
 	//when a player is accused to be a witch
 	public void beingAccuesd(Game game) {
+		game.displayStatus();
 		Player accusePlayer = game.findPlayer(game.getAccuse()[0]);
 		Player accusedPlayer = game.findPlayer(game.getAccuse()[1]);
 		if (!this.hand.isEmpty()) {

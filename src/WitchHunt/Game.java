@@ -167,18 +167,20 @@ public class Game {
 	}
 	
 	public void playGame() {
-
+		initPile();
+		distribute();
 		while(true) {
 			playTurn();
 			outOfGame();
 			if (isRoundEnd()) {
+				playerList.addAll(outPlayerList);
+				outPlayerList.clear();
 				if(isGameEnd()) {
 					break;
 				}
 				else {
 					//reset
-					playerList.addAll(outPlayerList);
-					outPlayerList.clear();
+					
 					Collections.sort(playerList, new Comparator<Player>() {
 						public int compare(Player p1, Player p2) {
 						    return Integer.compare(p1.getPlayerId(), p2.getPlayerId());
@@ -188,6 +190,7 @@ public class Game {
 					scoreBoard();
 					System.out.println("\nStart new round...\n");
 					chooseIdentity();
+					System.out.printf("Start from player %d, who was last to reveal his/her identity in the previous round\n",currentPlayer.getPlayerId());
 					for (Player player : playerList) {
 						player.getHand().clear();
 						player.getRevealedCards().clear();
@@ -208,6 +211,7 @@ public class Game {
 		/*
 		 * if this player is chosen by Evil Eye,he must accuse a player other than the player who accuses him
 		 */
+		displayStatus();
 		if (currentPlayer.getEvilEye() != 0) {
 			System.out.printf("Player %d, you are chosen by Evil Eye, you must accuse a player other than player %d if possible\n", 
 					currentPlayer.getPlayerId(), currentPlayer.getEvilEye());
@@ -378,8 +382,11 @@ public class Game {
 	public boolean isGameEnd() {
 		Player max = playerList.stream().max(Comparator.comparing(player -> player.getPoint())).get();
 		if(max.getPoint() >= 5) {
-			System.out.printf("Game ends, player %d wins, he has %d points\n",max.getPlayerId(),max.getPoint());
-			setCurrentPlayer(max);
+			//if this player is the only one
+			int isOnly = 0;
+			
+			System.out.printf("Game ends, player %d wins, he/she has %d points\n",max.getPlayerId(),max.getPoint());
+			
 			return true;
 		}
 		else {
@@ -444,6 +451,27 @@ public class Game {
 			return null;
 		}
 		
+	}
+	public void displayStatus() {
+		System.out.print("\n");
+		System.out.format("\t\t%5s\t%14s\t%8s\t%5s\n","Cards","Revealed Cards","Identity","Score");
+		for (Player player : playerList) {
+			if (player.isRevealed() == false) {
+				System.out.format("Player %d\t%5d\t%14d\t%8s\t%5d\n",
+						player.getPlayerId(),player.getHand().size(),player.getRevealedCards().size(),"Unrevealed",player.getPoint());
+			}
+			else {
+				System.out.format("Player %d\t%5d\t%14d\t%8s\t%5d\n",
+						player.getPlayerId(),player.getHand().size(),player.getRevealedCards().size(),player.getIdentity().toString(),player.getPoint());
+			}
+		}
+		if (!discardPile.isEmpty()) {
+			System.out.print("Discard pile: ");
+			for (RumourCard card : discardPile) {
+				System.out.print(card.getCardName().toString()+"\t");
+			}
+		}
+		System.out.print("\n\n");
 	}
 	
 	

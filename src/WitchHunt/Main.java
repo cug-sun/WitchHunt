@@ -16,8 +16,8 @@ public class Main {
 //		aPlayer.revealIdentity();
 //		witchHunt.playerList.get(0).revealIdentity();
 
-		witchHunt.initPile();
-		witchHunt.distribute();
+//		witchHunt.initPile();
+//		witchHunt.distribute();
 		witchHunt.playGame();
 //		witchHunt.playTurn();
 //		witchHunt.outOfGame();
